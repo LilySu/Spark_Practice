@@ -21,6 +21,19 @@ aws emr create-cluster --name "Spark cluster" --release-label emr-5.30.1 --appli
 ```
 
 #### EMR > Notebooks > Create Notebook
+
+Create a Notebook
+<a href="https://www.youtube.com/watch?v=EcIYPkCkehY"><img src="images/emr_015.PNG" width="80%" /></a>
+
+Got a ServiceRole error. Had to attach this policy `AmazonElasticMapReduceEditorsRole` to IAM.
+
+<a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-service-role.html"><img src="images/emr_02.PNG" width="80%" /></a>
+emr_02.PNG
+
+
+#### Other Troubleshooting Resources 
+##### S3 permission errors:
+
 - first insert these permissions into the S3 bucket policy
 
 S3 bucket `aws-emr-resources-<my-IAM>-us-east-1`
