@@ -19,3 +19,42 @@
 aws emr create-cluster --name "Spark cluster" --release-label emr-5.30.1 --applications Name=Spark \
 --ec2-attributes KeyName=spark-cluster --instance-type m5.xlarge --instance-count 3 --use-default-roles
 ```
+
+#### EMR > Notebooks > Create Notebook
+- first insert these permissions into the S3 bucket policy
+
+S3 bucket `aws-emr-resources-<my-IAM>-us-east-1`
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<my-IAM>:role/EMR_DefaultRole"
+            },
+            "Action": [
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::aws-emr-resources-<my-IAM>-us-east-1"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<my-IAM>:role/EMR_DefaultRole"
+            },
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::aws-emr-resources-<my-IAM>-us-east-1/*"
+            ]
+        }
+    ]
+}
+```
